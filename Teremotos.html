@@ -50,7 +50,7 @@
 
 
             function peticionTerremotos() { //coje de la ventana que se ve en el mapa
-                var peticion = 'https://api.geonames.org/earthquakesJSON?' +
+                var peticion = 'http://api.geonames.org/earthquakesJSON?' +
                     'north=' + map.getBounds()._northEast.lat + '&' +
                     'south=' + map.getBounds()._southWest.lat + '&' +
                     'east=' + map.getBounds()._northEast.lng + '&' +
