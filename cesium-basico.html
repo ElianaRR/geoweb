@@ -1,0 +1,51 @@
+<html lang="es">
+<head>
+    <title>Ejemplo 0 Cesium básico</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="autor" />
+    <meta name="description" content="descripción página">
+    <meta name="robots" content="index,follow">
+    <script src="https://cesiumjs.org/releases/1.53/Build/Cesium/Cesium.js"></script> <!--llamamos a la libreria de cesium. Se podria hacer en local. si queremos trabajar en local: 
+        ir a pag ppal de cesium y donde sale latest release download, le damos. Vamos a donde nos lo hemos bajado,lo q necesitamos para trabajar en local: cesium y 
+        los descargamos en la carpeta html de geoweb --> 
+    <link href="https://cesiumjs.org/releases/1.53/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <style>
+        #map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            height: 100%;
+        }
+    </style>
+    <script>
+        function Init() { //justo en la línea de abajo poner el token que nos aparece en nuestra cuenta de Cesium
+            Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5NjM0N2QwYS1kNTBiLTRlYzQtOTIwZi00MWY5NzcwMzA3NWUiLCJpZCI6NzQ3Miwic2NvcGVzIjpbImFzciIsImdjIl0sImlhdCI6MTU0OTQ3MTg5MH0.2zyWUrMnqR5Hbr3X_JE3XsR-hJJAtPiKYaixyAEtBPQ';
+            map = new Cesium.Viewer('map',/* si queremos pasar opciones (vamos a API reference):{}*/);
+
+            //add Properties
+
+            //si cambiamos la coordenada y el zoom, hace zoom hacia donde digamos
+             map.camera.flyTo({
+                destination : Cesium.Cartesian3.fromDegrees( 2.1806,41.4003, 15000)
+            });
+
+             
+        };
+    </script>
+</head>
+<body onload="Init()">
+    <div id="map"></div>
+</body>
+</html>

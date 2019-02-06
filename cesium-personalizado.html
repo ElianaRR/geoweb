@@ -1,0 +1,75 @@
+   <html lang="es">
+
+<head>
+    <title>Ejemplo 0 Cesium básico</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="autor" />
+    <meta name="description" content="descripción página">
+    <meta name="robots" content="index,follow">
+    <script src="https://cesiumjs.org/releases/1.53/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesiumjs.org/releases/1.53/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <style>
+        #map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            height: 100%;
+        }
+    </style>
+    <script>
+        function Init() {
+            var terrain5M = new Cesium.CesiumTerrainProvider({
+                 url: 'https://tilemaps.icgc.cat/terrenys/demextes/'
+            });
+            Cesium.Ion.defaultAccessToken =
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5NjM0N2QwYS1kNTBiLTRlYzQtOTIwZi00MWY5NzcwMzA3NWUiLCJpZCI6NzQ3Miwic2NvcGVzIjpbImFzciIsImdjIl0sImlhdCI6MTU0OTQ3MTg5MH0.2zyWUrMnqR5Hbr3X_JE3XsR-hJJAtPiKYaixyAEtBPQ';
+            map = new Cesium.Viewer('map', {
+
+                imageryProvider: new Cesium.ArcGisMapServerImageryProvider({ //le pasamos opciones
+                    url: '//services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/',
+                }),
+
+                timeline: false,
+                navigationHelpButton: true, //botón de ayuda activado
+                scene3DOnly: true,
+                fullscreenButton: true, //botón de full screen activado
+                baseLayerPicker: false, 
+                homeButton: false, //botón inicio desactivado
+                infoBox: true,
+                sceneModePicker: false,
+                animation: false,
+                geocoder: false, //buscador desactivado
+                sceneMode: Cesium.SceneMode.SCENE3D, //arrancamos con escena en 3D por defecto
+                //terrainProvider: Cesium.createWorldTerrain() Vamos a https://openicgc.github.io/ y cogemos el terreno de altitud 5m y añadir el var terrain5M al principio del INIT
+                terrainProvider: terrain5M
+
+            });
+
+
+            map.camera.flyTo({
+                destination: Cesium.Cartesian3.fromDegrees(2.1806, 41.4003, 15000),
+                orientation: {
+                    pitch: Cesium.Math.toRadians(-45.0) //le damos una orientación
+                },
+            });
+        };
+    </script>
+</head>
+
+<body onload="Init()">
+    <div id="map"></div>
+</body>
+
+</html>
